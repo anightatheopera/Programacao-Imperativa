@@ -97,13 +97,17 @@ ABin equilibraEspinha(ABin *a, int n){
     if(n == 0){
         return *a;
     }
-    // n é o numero de nodos que quero equilibrar
     int p = 0;
     for(p = 0; p < n/2; p++)
         rodaEsquerda(a);
-    
     return *a;
-    
+}
+
+//alinea i
+void equilibra(ABin *a){
+    int len = contaNodos(a);
+    constroiEspinha(a);
+    equilibraEspinha(a,len);
 }
 
 int main(){
@@ -111,8 +115,7 @@ int main(){
     ABin a = btree_fromArray(arr, sizeof(arr)/sizeof(arr[0]));
     btree_debug(a);
     printf("-----------------\n");
-    constroiEspinha(&a);
-    equilibraEspinha(&a,15);
+    equilibra(&a);
     //rodaEsquerda(&a);
     btree_debug(a);
     printf("-----------------\n");
