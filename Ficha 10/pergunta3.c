@@ -100,6 +100,10 @@ ABin equilibraEspinha(ABin *a, int n){
     int p = 0;
     for(p = 0; p < n/2; p++)
         rodaEsquerda(a);
+    ABin* left = &(*a)->esq;
+    constroiEspinha(left);
+    (*a)->esq = equilibraEspinha(left, p);
+    (*a)->dir = equilibraEspinha(&(*a)->dir, p);
     return *a;
 }
 
@@ -115,6 +119,8 @@ int main(){
     ABin a = btree_fromArray(arr, sizeof(arr)/sizeof(arr[0]));
     btree_debug(a);
     printf("-----------------\n");
+    //constroiEspinha(&a);
+    //equilibraEspinha(&a,15);
     equilibra(&a);
     //rodaEsquerda(&a);
     btree_debug(a);
